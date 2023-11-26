@@ -7,7 +7,7 @@ public enum IOMessage {
     INPUT_RESTART_OR_QUIT("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)"),
     FINAL_GAME_RESULT("최종 게임 결과"),
     IS_SUCCESS("게임 성공 여부"),
-    TOTAL_MOVING_COUNT("총 이동 횟수"),
+    TOTAL_MOVING_COUNT("총 시도한 횟수"),
     SUCCESS("성공"),
     FAIL("실패"),
     ;
