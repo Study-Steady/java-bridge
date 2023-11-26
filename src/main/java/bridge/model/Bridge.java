@@ -8,18 +8,15 @@ import java.util.List;
 import java.util.Objects;
 
 import static bridge.model.BridgeSymbol.*;
-import static bridge.model.BridgeSymbol.EMPTY;
 
 public class Bridge {
 
     private final List<String> bridge;
     private List<String> history;
-    private int pos;
 
     private Bridge(List<String> bridge) {
         this.bridge = bridge;
         this.history = new ArrayList<>();
-        this.pos = 0;
     }
 
     public static Bridge of(BridgeMaker bridgeMaker, int size) {
@@ -27,7 +24,6 @@ public class Bridge {
     }
 
     public void resetBridge() {
-        this.pos = 0;
         this.history.clear();
     }
 
