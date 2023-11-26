@@ -30,20 +30,23 @@ public class Bridge {
         this.history.clear();
     }
 
-    public boolean proceed(String userInput) {
+    public GameStatus proceed(String userInput) {
         history.add(userInput);
         if (bridge.get(history.size() - 1).equals(userInput)) {
-            return true;
+            if (bridge.size() == history.size()) {
+                return GameStatus.FINISH;
+            }
+            return GameStatus.NORMAL;
         }
-        return false;
-    }
-
-    public int getPosition() {
-        return pos;
+        return GameStatus.RETRY;
     }
 
     public List<String> getBridge() {
         return Collections.unmodifiableList(bridge);
+    }
+
+    public boolean isBridgeGameSuccess() {
+        return history.size() == bridge.size();
     }
 
     public String getBridgeHistory() {
