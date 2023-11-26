@@ -33,13 +33,13 @@ public class Bridge {
 
     public GameStatus proceed(String userInput) {
         history.add(userInput);
-        if (bridge.get(history.size() - 1).equals(userInput)) {
-            if (bridge.size() == history.size()) {
-                return GameStatus.FINISH;
-            }
-            return GameStatus.NORMAL;
+        if (!bridge.get(history.size() - 1).equals(userInput)) {
+            return GameStatus.RETRY;
         }
-        return GameStatus.RETRY;
+        if (bridge.size() == history.size()) {
+            return GameStatus.FINISH;
+        }
+        return GameStatus.NORMAL;
     }
 
     public List<String> getBridge() {
