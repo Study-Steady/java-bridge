@@ -12,16 +12,19 @@ public class BridgeGame {
     private final BridgeMaker bridgeMaker;
     private Bridge bridge;
     private GameStatus gameStatus;
+    private int round;
 
     public BridgeGame(BridgeMaker bridgeMaker) {
         this.bridgeMaker = bridgeMaker;
         this.gameStatus = GameStatus.NORMAL;
+        this.round = 0;
     }
 
     public void initBridgeGame(int size) {
         this.bridge = Bridge.of(bridgeMaker, size);
         System.out.println(bridge.getBridge().toString());
         this.gameStatus = GameStatus.NORMAL;
+        this.round = 0;
     }
 
     /**
@@ -42,9 +45,18 @@ public class BridgeGame {
     public void retry() {
         bridge.resetBridge();
         this.gameStatus = GameStatus.NORMAL;
+        this.round++;
     }
 
     public GameStatus getGameStatus() {
         return gameStatus;
+    }
+
+    public int getRound() {
+        return round;
+    }
+
+    public String getBridgeHistory() {
+        return bridge.getBridgeHistory();
     }
 }
