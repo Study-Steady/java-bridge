@@ -22,7 +22,6 @@ public class BridgeGame {
 
     public void initBridgeGame(int size) {
         this.bridge = Bridge.of(bridgeMaker, size);
-        System.out.println(bridge.getBridge().toString());
         this.gameStatus = GameStatus.NORMAL;
         this.round = 1;
     }
