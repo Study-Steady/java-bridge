@@ -19,6 +19,6 @@ public enum ExceptionMessage {
     }
 
     public String getMessage() {
-        return ExceptionSymbol.PREFIX + message;
+        return ExceptionSymbol.PREFIX.getValue() + message;
     }
 }
