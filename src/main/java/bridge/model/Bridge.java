@@ -11,10 +11,12 @@ import static bridge.model.BridgeSymbol.*;
 public class Bridge {
 
     private final List<String> bridge;
+    private List<String> history;
     private int pos;
 
     private Bridge(List<String> bridge) {
         this.bridge = bridge;
+        this.history = new ArrayList<>();
         pos = 0;
     }
 
@@ -24,6 +26,7 @@ public class Bridge {
 
     public void resetBridge() {
         this.pos = 0;
+        this.history.clear();
     }
 
     public boolean proceed(String userInput) {
@@ -48,8 +51,13 @@ public class Bridge {
     private void getBridgeStatusBySymbol(StringBuilder sb, BridgeSymbol bridgeSymbol) {
         sb.append(BRIDGE_START.getSymbol());
         for (int i = 0; i <= pos; i++) {
+            BridgeSymbol isMovable = MOVABLE;
+            if (history.get(i) != bridge.get(i)) {
+                isMovable = UNMOVABLE;
+            }
+
             if (bridge.get(i).equals(bridgeSymbol.getSymbol())) {
-                sb.append(MOVABLE.getSymbol());
+                sb.append(isMovable.getSymbol());
                 sb.append(BRIDGE_SEPARATOR.getSymbol());
                 continue;
             }
