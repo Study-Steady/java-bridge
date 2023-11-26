@@ -5,6 +5,7 @@ import bridge.utils.BridgeMaker;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static bridge.model.BridgeSymbol.*;
 
@@ -17,7 +18,7 @@ public class Bridge {
     private Bridge(List<String> bridge) {
         this.bridge = bridge;
         this.history = new ArrayList<>();
-        pos = 0;
+        this.pos = 0;
     }
 
     public static Bridge of(BridgeMaker bridgeMaker, int size) {
@@ -30,10 +31,15 @@ public class Bridge {
     }
 
     public boolean proceed(String userInput) {
-        if (bridge.get(pos++).equals(userInput)) {
+        history.add(userInput);
+        if (bridge.get(history.size() - 1).equals(userInput)) {
             return true;
         }
         return false;
+    }
+
+    public int getPosition() {
+        return pos;
     }
 
     public List<String> getBridge() {
@@ -43,16 +49,16 @@ public class Bridge {
     public String getBridgeHistory() {
         StringBuilder sb = new StringBuilder();
         getBridgeStatusBySymbol(sb, UP);
-        sb.append(NEW_LINE);
+        sb.append(NEW_LINE.getSymbol());
         getBridgeStatusBySymbol(sb, DOWN);
         return sb.toString();
     }
 
     private void getBridgeStatusBySymbol(StringBuilder sb, BridgeSymbol bridgeSymbol) {
         sb.append(BRIDGE_START.getSymbol());
-        for (int i = 0; i <= pos; i++) {
+        for (int i = 0; i < history.size(); i++) {
             BridgeSymbol isMovable = MOVABLE;
-            if (history.get(i) != bridge.get(i)) {
+            if (!Objects.equals(history.get(i), bridge.get(i))) {
                 isMovable = UNMOVABLE;
             }
 
@@ -63,6 +69,10 @@ public class Bridge {
             }
             sb.append(EMPTY.getSymbol());
             sb.append(BRIDGE_SEPARATOR.getSymbol());
+        }
+
+        for (int i = 0; i < BRIDGE_SEPARATOR.getSymbol().length(); i++) {
+            sb.deleteCharAt(sb.length() - 1);
         }
         sb.append(BRIDGE_END.getSymbol());
     }
