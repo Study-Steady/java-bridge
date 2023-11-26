@@ -7,7 +7,10 @@ public enum BridgeSymbol {
     BRIDGE_SEPARATOR(" | "),
     MOVABLE("O"),
     UNMOVABLE("X"),
+    UP("U"),
+    DOWN("D"),
     EMPTY(" "),
+    NEW_LINE("\n"),
     ;
 
     private final String symbol;
