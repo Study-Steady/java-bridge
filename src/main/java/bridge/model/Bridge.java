@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static bridge.model.BridgeSymbol.*;
+import static bridge.model.BridgeSymbol.EMPTY;
 
 public class Bridge {
 
@@ -60,17 +61,18 @@ public class Bridge {
     private void getBridgeStatusBySymbol(StringBuilder sb, BridgeSymbol bridgeSymbol) {
         sb.append(BRIDGE_START.getSymbol());
         for (int i = 0; i < history.size(); i++) {
-            BridgeSymbol isMovable = MOVABLE;
+            BridgeSymbol onMovable = MOVABLE, onUnmovable = EMPTY;
             if (!Objects.equals(history.get(i), bridge.get(i))) {
-                isMovable = UNMOVABLE;
+                onMovable = EMPTY;
+                onUnmovable = UNMOVABLE;
             }
 
             if (bridge.get(i).equals(bridgeSymbol.getSymbol())) {
-                sb.append(isMovable.getSymbol());
+                sb.append(onMovable.getSymbol());
                 sb.append(BRIDGE_SEPARATOR.getSymbol());
                 continue;
             }
-            sb.append(EMPTY.getSymbol());
+            sb.append(onUnmovable.getSymbol());
             sb.append(BRIDGE_SEPARATOR.getSymbol());
         }
 
