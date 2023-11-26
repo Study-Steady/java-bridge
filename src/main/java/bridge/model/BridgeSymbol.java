@@ -7,6 +7,8 @@ public enum BridgeSymbol {
     BRIDGE_SEPARATOR(" | "),
     MOVABLE("O"),
     UNMOVABLE("X"),
+    RESTART("R"),
+    QUIT("Q"),
     UP("U"),
     DOWN("D"),
     EMPTY(" "),
