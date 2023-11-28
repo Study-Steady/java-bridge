@@ -42,10 +42,6 @@ public class BridgeGameController {
         String userInput = readMoving();
         outputView.printMap(bridgeGame.move(userInput));
 
-        if (bridgeGame.getGameStatus() == GameStatus.FINISH) {
-            return;
-        }
-
         if (bridgeGame.getGameStatus() == GameStatus.RETRY) {
             String userCommand = readGameCommand();
             if (userCommand.equals(BridgeSymbol.RESTART.getSymbol())) {
