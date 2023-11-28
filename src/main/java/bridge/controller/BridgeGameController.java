@@ -31,7 +31,7 @@ public class BridgeGameController {
     }
 
     private void playBridgeGame() {
-        int bridgeSize = readBridgeSize(); // inputView.readBridgeSize();
+        int bridgeSize = readBridgeSize();
         bridgeGame.initBridgeGame(bridgeSize);
         while (bridgeGame.getGameStatus() == GameStatus.NORMAL) {
             play();
@@ -39,7 +39,7 @@ public class BridgeGameController {
     }
 
     protected void play() {
-        String userInput = readMoving(); // inputView.readMoving();
+        String userInput = readMoving();
         outputView.printMap(bridgeGame.move(userInput));
 
         if (bridgeGame.getGameStatus() == GameStatus.FINISH) {
@@ -47,7 +47,7 @@ public class BridgeGameController {
         }
 
         if (bridgeGame.getGameStatus() == GameStatus.RETRY) {
-            String userCommand = readGameCommand(); // inputView.readGameCommand();
+            String userCommand = readGameCommand();
             if (userCommand.equals(BridgeSymbol.RESTART.getSymbol())) {
                 bridgeGame.retry();
             }
