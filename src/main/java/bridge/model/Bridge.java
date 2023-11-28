@@ -12,7 +12,7 @@ import static bridge.model.BridgeSymbol.*;
 public class Bridge {
 
     private final List<String> bridge;
-    private List<String> history;
+    private final List<String> history;
 
     private Bridge(List<String> bridge) {
         this.bridge = bridge;

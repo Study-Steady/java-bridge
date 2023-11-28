@@ -1,7 +1,6 @@
 package bridge.exception;
 
 public enum ExceptionSymbol {
-
     PREFIX("[ERROR] "),
     ;
 
