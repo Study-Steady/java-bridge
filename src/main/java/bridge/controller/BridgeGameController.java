@@ -6,6 +6,8 @@ import bridge.view.IOMessage;
 import bridge.view.input.InputView;
 import bridge.view.output.OutputView;
 
+import java.util.function.Supplier;
+
 public class BridgeGameController {
 
     private final BridgeGame bridgeGame;
@@ -29,7 +31,7 @@ public class BridgeGameController {
     }
 
     private void playBridgeGame() {
-        int bridgeSize = inputView.readBridgeSize();
+        int bridgeSize = readBridgeSize(); // inputView.readBridgeSize();
         bridgeGame.initBridgeGame(bridgeSize);
         while (bridgeGame.getGameStatus() == GameStatus.NORMAL) {
             play();
@@ -37,7 +39,7 @@ public class BridgeGameController {
     }
 
     protected void play() {
-        String userInput = inputView.readMoving();
+        String userInput = readMoving(); // inputView.readMoving();
         outputView.printMap(bridgeGame.move(userInput));
 
         if (bridgeGame.getGameStatus() == GameStatus.FINISH) {
@@ -45,7 +47,7 @@ public class BridgeGameController {
         }
 
         if (bridgeGame.getGameStatus() == GameStatus.RETRY) {
-            String userCommand = inputView.readGameCommand();
+            String userCommand = readGameCommand(); // inputView.readGameCommand();
             if (userCommand.equals(BridgeSymbol.RESTART.getSymbol())) {
                 bridgeGame.retry();
             }
@@ -58,5 +60,26 @@ public class BridgeGameController {
             isSuccess = IOMessage.FAIL;
         }
         outputView.printResult(bridgeGame.getBridgeHistory(), isSuccess.getMessage(), bridgeGame.getRound());
+    }
+
+    private <T> T process(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e);
+            return process(supplier);
+        }
+    }
+
+    private int readBridgeSize() {
+        return process(inputView::readBridgeSize);
+    }
+
+    private String readMoving() {
+        return process(inputView::readMoving);
+    }
+
+    private String readGameCommand() {
+        return process(inputView::readGameCommand);
     }
 }

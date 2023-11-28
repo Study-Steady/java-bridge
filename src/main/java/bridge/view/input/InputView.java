@@ -15,8 +15,6 @@ import static bridge.view.IOMessage.*;
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 public class InputView {
-    // todo while 문을 사용하지 않고 리팩토링을 진행
-
     private final Reader reader;
     private final Printer printer;
 
@@ -29,22 +27,12 @@ public class InputView {
      * 다리의 길이를 입력받는다.
      */
     public int readBridgeSize() {
-        boolean flag = true;
-        int size = 0;
-        while (flag) {
-            flag = false;
-            try {
-                printer.print(INPUT_BRIDGE_SIZE.getMessage());
-                String input = reader.inputOneLine();
-                validateInput(input);
-                validateIsDigit(input);
-                size = convertStringToInteger(input);
-                validateBridgeSizeInRange(size);
-            } catch (IllegalArgumentException e) {
-                printer.print(e.getMessage());
-                flag = true;
-            }
-        }
+        printer.print(INPUT_BRIDGE_SIZE.getMessage());
+        String input = reader.inputOneLine();
+        validateInput(input);
+        validateIsDigit(input);
+        int size = convertStringToInteger(input);
+        validateBridgeSizeInRange(size);
         return size;
     }
 
@@ -52,21 +40,10 @@ public class InputView {
      * 사용자가 이동할 칸을 입력받는다.
      */
     public String readMoving() {
-        boolean flag = true;
-        String input = "";
-
-        while (flag) {
-            flag = false;
-            try {
-                printer.print(INPUT_MOVING.getMessage());
-                input = reader.inputOneLine();
-                validateInput(input);
-                validateMovingCommand(input);
-            } catch (IllegalArgumentException e) {
-                printer.print(e.getMessage());
-                flag = true;
-            }
-        }
+        printer.print(INPUT_MOVING.getMessage());
+        String input = reader.inputOneLine();
+        validateInput(input);
+        validateMovingCommand(input);
         return input;
     }
 
@@ -74,20 +51,10 @@ public class InputView {
      * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
      */
     public String readGameCommand() {
-        boolean flag = true;
-        String input = "";
-        while (flag) {
-            flag = false;
-            try {
-                printer.print(INPUT_RESTART_OR_QUIT.getMessage());
-                input = reader.inputOneLine();
-                validateInput(input);
-                validateRestartOrQuitCommand(input);
-            } catch (IllegalArgumentException e) {
-                printer.print(e.getMessage());
-                flag = true;
-            }
-        }
+        printer.print(INPUT_RESTART_OR_QUIT.getMessage());
+        String input = reader.inputOneLine();
+        validateInput(input);
+        validateRestartOrQuitCommand(input);
         return input;
     }
 
