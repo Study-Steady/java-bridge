@@ -29,11 +29,8 @@ public class InputView {
     public int readBridgeSize() {
         printer.print(INPUT_BRIDGE_SIZE.getMessage());
         String input = reader.inputOneLine();
-        validateInput(input);
-        validateIsDigit(input);
-        int size = convertStringToInteger(input);
-        validateBridgeSizeInRange(size);
-        return size;
+        validateBridgeSize(input);
+        return convertStringToInteger(input);
     }
 
     /**
@@ -42,8 +39,7 @@ public class InputView {
     public String readMoving() {
         printer.print(INPUT_MOVING.getMessage());
         String input = reader.inputOneLine();
-        validateInput(input);
-        validateMovingCommand(input);
+        validateMoving(input);
         return input;
     }
 
@@ -53,9 +49,25 @@ public class InputView {
     public String readGameCommand() {
         printer.print(INPUT_RESTART_OR_QUIT.getMessage());
         String input = reader.inputOneLine();
+        validateGameCommand(input);
+        return input;
+    }
+
+    private void validateBridgeSize(String input) {
+        validateInput(input);
+        validateIsDigit(input);
+        int size = convertStringToInteger(input);
+        validateBridgeSizeInRange(size);
+    }
+
+    private void validateMoving(String input) {
+        validateInput(input);
+        validateMovingCommand(input);
+    }
+
+    private void validateGameCommand(String input) {
         validateInput(input);
         validateRestartOrQuitCommand(input);
-        return input;
     }
 
     private void validateInput(String input) {
