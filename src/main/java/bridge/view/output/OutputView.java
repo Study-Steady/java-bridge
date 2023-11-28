@@ -39,4 +39,8 @@ public class OutputView {
         printer.print(IS_SUCCESS.getMessage() + ": " + result);
         printer.print(TOTAL_MOVING_COUNT.getMessage() + ": " + movingCount);
     }
+
+    public void printErrorMessage(Exception e) {
+        printer.print(e.getMessage());
+    }
 }
