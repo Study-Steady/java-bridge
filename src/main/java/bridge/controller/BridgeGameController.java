@@ -58,24 +58,24 @@ public class BridgeGameController {
         outputView.printResult(bridgeGame.getBridgeHistory(), isSuccess.getMessage(), bridgeGame.getRound());
     }
 
-    private <T> T process(Supplier<T> supplier) {
+    private <T> T readUntilCorrectInput(Supplier<T> supplier) {
         try {
             return supplier.get();
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e);
-            return process(supplier);
+            return readUntilCorrectInput(supplier);
         }
     }
 
     private int readBridgeSize() {
-        return process(inputView::readBridgeSize);
+        return readUntilCorrectInput(inputView::readBridgeSize);
     }
 
     private String readMoving() {
-        return process(inputView::readMoving);
+        return readUntilCorrectInput(inputView::readMoving);
     }
 
     private String readGameCommand() {
-        return process(inputView::readGameCommand);
+        return readUntilCorrectInput(inputView::readGameCommand);
     }
 }
